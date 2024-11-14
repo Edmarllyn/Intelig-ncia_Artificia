@@ -69,9 +69,20 @@ header nav a:hover {
     background-position: center center; /* Centraliza a imagem */
     background-size: cover; /* Ajusta a imagem para cobrir todo o container */
     position: relative;
-    box-shadow: #1e1e2f;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
 }
 
+/* Camada preta semitransparente */
+.banner::before {
+    content: ''; /* Necessário para o pseudo-elemento */
+    position: absolute; /* Posiciona sobre o banner */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
+    z-index: 1; /* Garante que a camada preta fique acima da imagem */
+}
 
 .banner .content {
     position: relative;
@@ -84,13 +95,16 @@ header nav a:hover {
     animation: fade-slide-in 1.2s ease-out;
 }
 
+.banner > * {
+    z-index: 2; /* Garante que o conteúdo do banner (como textos) fique acima da camada preta */
+}
+
 .banner h2 {
     font-size: 2.8em;
     color: #f8b400;
     margin-bottom: 15px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 
 .banner .btn {
     margin-top: 20px;
@@ -108,8 +122,6 @@ header nav a:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-
 
 /* Seção com Cartões */
 .section {
@@ -215,35 +227,152 @@ header nav a:hover {
 }
 
 /* Rodapé */
-footer {
-    color: #fff;
+.footer {
+    color: white;
     text-align: center;
-    padding: 15px 0;
-    font-size: 0.9em;
-    position: relative;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
 }
 
-footer p {
-    opacity: 0.8;
+/* Conteúdo principal do footer */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-    header nav ul {
-        flex-direction: column;
+/* Texto principal */
+.footer-text {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Estilo para os links */
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: #f8b400; /* Cor verde para os links */
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ffff /* Cor do link ao passar o mouse */
+}
+
+/* Créditos no rodapé */
+.footer-credit {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    header .container {
+        flex-direction: row; /* Mantém lado a lado */
+        justify-content: space-between;
         align-items: center;
-        gap: 10px;
     }
 
-    .banner .content {
-        padding: 30px;
-        width: 90%;
+    header h1 {
+        font-size: 1.6em;
+    }
+
+    header nav ul {
+        display: flex;
+        gap: 15px;
+        flex-direction: row; /* Alinha os links horizontalmente */
+        align-items: center;
+    }
+
+    .banner h2 {
+        font-size: 2.2em;
+    }
+
+    .banner .btn {
+        padding: 12px 30px;
+    }
+
+    .section h2 {
+        font-size: 2.4em;
+    }
+
+    .cards {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .card {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .banner h2 {
+        font-size: 2.0em;
+    }
+
+    .banner .btn {
+        padding: 10px 20px;
     }
 
     .cards {
         flex-direction: column;
         align-items: center;
     }
+
+    .card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
 }
 
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.3em;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .banner h2 {
+        font-size: 1.8em;
+    }
+
+    .banner .btn {
+        padding: 10px 18px;
+    }
+
+    .footer-text {
+        font-size: 14px;
+    }
+
+    .footer-links a {
+        font-size: 16px;
+        margin: 0 10px;
+    }
+}
